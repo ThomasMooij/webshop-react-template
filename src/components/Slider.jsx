@@ -3,6 +3,7 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import {sliderItems} from "../data";
 import { useState } from 'react';
+import {mobile} from "../mobile";
 
 const Container = styled.div`
 width: 100%;
@@ -48,10 +49,13 @@ flex:1;
 display:flex;
 justify-content: center;
 align-items:center;
+${mobile({display:"none"})}
 `
 const Image = styled.img`
 height:60%;
 width: 60%;
+${mobile({display:"none"})}
+
 `
 const TextContainer = styled.div`
 flex:1;
@@ -90,11 +94,12 @@ const Slider = () => {
     };
   return (
     <Container>
+    {slide != 0 ? (
         <Arrow side="left" onClick={()=> handleClick('left')}>
-            <ArrowBackIosNewOutlinedIcon />
-        </Arrow>
-        <Wrapper slide={slide}>
-
+        <ArrowBackIosNewOutlinedIcon /> </Arrow>) : (
+        <div></div>
+    )}
+    <Wrapper slide={slide}>
         {sliderItems.map(slide => ( 
 
         <Slide bg={slide.bg}>
@@ -107,8 +112,7 @@ const Slider = () => {
                 <Button> Check hem uit! </Button>
             </TextContainer>
         </Slide> ))}
-
-        </Wrapper>
+    </Wrapper>
         <Arrow side="right" onClick={()=> handleClick('right')}>
             <ArrowForwardIosOutlinedIcon />
         </Arrow>
